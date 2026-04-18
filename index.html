@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LR REFINERY | Prasad & Sanjana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Pinyon+Script&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --gold: #c5a059; 
+            --deep-black: #0a0a0a; 
+            --royal-red: #450a0a;
+            --cream: #fdfaf5;
+        }
+        
+        body { 
+            background-color: var(--deep-black); 
+            color: var(--gold); 
+            font-family: 'Cormorant Garamond', serif; 
+            overflow-x: hidden; 
+            cursor: none !important; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Flower Cursor */
+        #cursor { 
+            width: 40px; 
+            height: 40px; 
+            position: fixed; 
+            pointer-events: none; 
+            z-index: 9999; 
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c5a059'%3e%3cpath d='M12,22C12,22 12,18 12,15C12,12 9,12 9,12C9,12 6,12 6,15C6,18 12,22 12,22M12,2C12,2 12,6 12,9C12,12 15,12 15,12C15,12 18,12 18,9C18,6 12,2 12,2M2,12C2,12 6,12 9,12C12,12 12,9 12,9C12,9 12,6 9,6C6,6 2,12 2,12M22,12C22,12 18,12 15,12C12,12 12,15 12,15C12,15 12,18 15,18C18,18 22,12 22,12M12,12C12,12 12,12 12,12Z'/%3e%3c/svg%3e");
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, opacity 0.3s;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
+        }
+
+        /* Ensure all clickable elements hide the default mouse */
+        a, button, [role="button"] { cursor: none !important; pointer-events: auto; }
+
+        section { 
+            height: 100vh; 
+            width: 100vw; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            perspective: 2000px;
+        }
+
+        .layer-bg { position: absolute; inset: 0; z-index: 1; transform: translateZ(-200px); }
+        .layer-content { z-index: 10; transform: translateZ(100px); }
+
+        .font-royal { font-family: 'Cinzel Decorative', cursive; }
+        .font-script { font-family: 'Pinyon Script', cursive; }
+        .font-modern { font-family: 'Montserrat', sans-serif; }
+
+        .gold-foil {
+            background: linear-gradient(72deg, #ca9d4c 4%, #f8e1a1 8%, #d5a952 12%, #ca9d4c 16%, #f8e1a1 20%, #d5a952 24%, #a47b33 28%, #ca9d4c 32%, #f8e1a1 36%, #d5a952 40%, #ca9d4c 44%, #f8e1a1 48%, #d5a952 52%, #ca9d4c 56%, #f8e1a1 60%, #d5a952 64%, #a47b33 68%, #ca9d4c 72%, #f8e1a1 76%, #d5a952 80%, #ca9d4c 84%, #f8e1a1 88%, #d5a952 92%, #ca9d4c 96%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% auto;
+            animation: foil-shine 6s linear infinite;
+        }
+        @keyframes foil-shine { to { background-position: 300% center; } }
+
+        .luxury-card {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .animated-border { position: relative; }
+        .animated-border::after {
+            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 1px solid var(--gold); opacity: 0.3; animation: pulse-border 3s infinite alternate;
+        }
+        @keyframes pulse-border { from { transform: scale(1); opacity: 0.3; } to { transform: scale(1.05); opacity: 0.1; } }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <section class="overflow-hidden">
+        <div class="layer-bg">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2041" class="w-full h-full object-cover opacity-20 scale-125">
+        </div>
+        <div class="layer-content text-center px-4" data-aos="zoom-in" data-aos-duration="2000">
+            <h3 class="font-royal text-sm tracking-[0.8em] text-white opacity-50 mb-10 uppercase">LR Refinery Presents</h3>
+            <h1 class="font-script text-8xl md:text-[10rem] gold-foil leading-none">Prasad <span class="text-4xl align-middle font-royal">&</span> Sanjana</h1>
+            <div class="h-1 w-32 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto my-10"></div>
+            <p class="font-royal text-2xl tracking-[0.4em] text-white">MAY 09 • 2026</p>
+            
+            <div id="timer" class="flex gap-8 justify-center mt-12 font-modern text-xs tracking-widest text-white/60">
+                <div class="luxury-card p-4 rounded-lg border border-gold/20"><span id="d" class="text-2xl block text-white font-bold">00</span>DAYS</div>
+                <div class="luxury-card p-4 rounded-lg border border-gold/20"><span id="h" class="text-2xl block text-white font-bold">00</span>HRS</div>
+                <div class="luxury-card p-4 rounded-lg border border-gold/20"><span id="m" class="text-2xl block text-white font-bold">00</span>MIN</div>
+                <div class="luxury-card p-4 rounded-lg border border-gold/20 text-gold"><span id="s" class="text-2xl block font-bold">00</span>SEC</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#0f0f0f]">
+        <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10 px-6">
+            <div class="luxury-card p-12 rounded-2xl relative overflow-hidden" data-aos="fade-right">
+                <div class="absolute -top-10 -right-10 font-royal text-9xl opacity-5">01</div>
+                <h2 class="font-royal text-3xl gold-foil mb-4">Sakharpuda</h2>
+                <p class="font-script text-3xl text-white mb-6">The Engagement Ceremony</p>
+                <p class="text-white/60 font-modern leading-relaxed mb-8">Join us as we exchange rings and promises, marking the first step of our eternal journey together.</p>
+                <div class="bg-gold/10 p-4 border-l-4 border-gold text-white font-modern">
+                    <p class="font-bold">MAY 08, 2026</p>
+                    <p class="text-gold">Evening 06:30 PM</p>
+                </div>
+            </div>
+
+            <div class="luxury-card p-12 rounded-2xl relative overflow-hidden" data-aos="fade-left">
+                <div class="absolute -top-10 -right-10 font-royal text-9xl opacity-5">02</div>
+                <h2 class="font-royal text-3xl text-yellow-500 mb-4">Haldi Function</h2>
+                <p class="font-script text-3xl text-white mb-6">The Golden Glow</p>
+                <p class="text-white/60 font-modern leading-relaxed mb-8">A playful celebration filled with turmeric and blessings to prepare the bride and groom for their sacred union.</p>
+                <div class="bg-yellow-500/10 p-4 border-l-4 border-yellow-500 text-white font-modern">
+                    <p class="font-bold">MAY 08, 2026</p>
+                    <p class="text-yellow-500">Night 08:00 PM onwards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-royal-red">
+        <div class="layer-bg opacity-30">
+            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070" class="w-full h-full object-cover">
+        </div>
+        <div class="layer-content text-center luxury-card p-16 md:p-24 rounded-full animated-border" data-aos="zoom-out">
+            <h2 class="font-royal text-5xl gold-foil mb-6">Shubh Vivah</h2>
+            <p class="font-modern uppercase tracking-[0.5em] text-white/70 mb-2 text-sm">Sacred Wedding Ceremony</p>
+            <p class="font-script text-6xl text-white my-8">Auspicious Muhurta</p>
+            <p class="text-7xl font-bold gold-foil">12:23 PM</p>
+            <div class="h-[1px] w-20 bg-gold mx-auto my-10"></div>
+            <p class="font-royal text-2xl text-white">Marda Mangal Karyalay</p>
+            <p class="text-white/50 text-sm tracking-widest mt-2">Akkalkot Road, Solapur</p>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=Marda+Mangal+Karyalay+Solapur" 
+               target="_blank" 
+               class="mt-12 inline-block px-10 py-4 border border-gold text-gold font-modern hover:bg-gold hover:text-black transition-all duration-500 tracking-[0.3em] text-xs font-bold rounded-full relative z-[100] nav-link">
+                VIEW ON MAP
+            </a>
+        </div>
+    </section>
+
+    <section class="bg-stone-900 overflow-hidden">
+        <div class="max-w-5xl text-center px-6">
+            <div data-aos="fade-up">
+                <h4 class="font-royal text-xl gold-foil mb-10 tracking-[0.5em]">THE SALUNKHE & MANE FAMILIES</h4>
+                <div class="grid md:grid-cols-2 gap-20 text-white/70 font-modern leading-loose italic">
+                    <p>"We invite you to be part of our joy as we welcome a new daughter into the Salunkhe family and a new son into the Mane family."</p>
+                    <p>"Your presence and blessings are the only gifts we seek as we embark on this new chapter of life."</p>
+                </div>
+                <div class="mt-24 space-y-4">
+                    <p class="font-script text-6xl text-gold">Thank You</p>
+                    <p class="text-[10px] tracking-[0.8em] opacity-30 uppercase text-white">Aaher Swikarle Janar Nahi</p>
+                    <h2 class="font-royal text-3xl gold-foil pt-10">LR REFINERY, SOLAPUR</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        const cursor = document.getElementById('cursor');
+        
+        // Custom Cursor Follow & Interaction
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover Effect for Button: Flower Blooms
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.width = '70px';
+                cursor.style.height = '70px';
+                cursor.style.opacity = '0.7';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.opacity = '1';
+            });
+        });
+
+        // 3D Parallax Effect
+        document.addEventListener('mousemove', e => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const bg = section.querySelector('.layer-bg img');
+                const content = section.querySelector('.layer-content');
+                if(bg) bg.style.transform = `scale(1.2) translate(${(e.clientX - window.innerWidth/2)/50}px, ${(e.clientY - window.innerHeight/2)/50}px)`;
+                if(content) content.style.transform = `translateZ(100px) rotateY(${(e.clientX - window.innerWidth/2)/100}deg) rotateX(${-(e.clientY - window.innerHeight/2)/100}deg)`;
+            });
+        });
+
+        // Countdown Logic
+        const target = new Date("May 9, 2026 12:23:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>
