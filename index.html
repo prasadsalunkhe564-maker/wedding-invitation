@@ -143,6 +143,7 @@
             border: 1px solid var(--border-white);
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            cursor: pointer;
         }
 
         .muhurta-glow-card {
@@ -175,7 +176,38 @@
             width: 100%; margin: 2rem 0; opacity: 0.4;
         }
 
-        /* 5. GRAND FINALE (FOOTER) */
+        /* 5. GALLERY EXPAND (LIGHTBOX) CSS */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        #lightbox.active { display: flex; opacity: 1; }
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 2px solid var(--gold);
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        #lightbox.active #lightbox-img { transform: scale(1); }
+        .close-lightbox {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 2.5rem;
+            color: var(--gold);
+            cursor: pointer;
+            font-family: 'Montserrat';
+        }
+
+        /* 6. GRAND FINALE (FOOTER) */
         .grand-finale {
             position: relative;
             padding: 15vh 5% 10vh;
@@ -199,9 +231,9 @@
         .thank-you-title {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(5rem, 15vw, 12rem);
-            line-height: 1.6; /* Fixed: Increased to prevent cropping */
+            line-height: 1.6;
             margin: 1rem 0;
-            padding: 20px 0; /* Fixed: Added padding for cursive loops */
+            padding: 20px 0;
             background: linear-gradient(to bottom, #fff 20%, var(--gold) 50%, #a47b33 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -216,7 +248,7 @@
 
         .family-pill {
             display: inline-block;
-            padding: 15px 40px; /* Increased padding */
+            padding: 15px 40px;
             border: 1px solid rgba(197, 160, 89, 0.4);
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.05);
@@ -225,8 +257,8 @@
         }
 
         .family-pill h4 {
-            font-size: clamp(0.9rem, 2vw, 1.2rem) !important; /* Made text bigger */
-            letter-spacing: 0.8em !important; /* More space between letters */
+            font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+            letter-spacing: 0.8em !important;
             font-weight: 700 !important;
             color: var(--gold-light);
         }
@@ -265,6 +297,13 @@
     <div id="cursor"></div>
     <div id="particles-js"></div>
 
+    <!-- LIGHTBOX OVERLAY -->
+    <div id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img src="" id="lightbox-img">
+    </div>
+
+    <!-- HERO SECTION -->
     <section class="overflow-hidden min-h-screen">
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black z-10"></div>
@@ -282,18 +321,9 @@
             </div>
             
             <div class="timer-container" data-aos="fade-up" data-aos-delay="700">
-                <div class="timer-pod">
-                    <span id="d" class="timer-num">00</span>
-                    <span class="timer-tag">Days</span>
-                </div>
-                <div class="timer-pod">
-                    <span id="h" class="timer-num">00</span>
-                    <span class="timer-tag">Hours</span>
-                </div>
-                <div class="timer-pod">
-                    <span id="m" class="timer-num">00</span>
-                    <span class="timer-tag">Mins</span>
-                </div>
+                <div class="timer-pod"><span id="d" class="timer-num">00</span><span class="timer-tag">Days</span></div>
+                <div class="timer-pod"><span id="h" class="timer-num">00</span><span class="timer-tag">Hours</span></div>
+                <div class="timer-pod"><span id="m" class="timer-num">00</span><span class="timer-tag">Mins</span></div>
                 <div class="timer-pod seconds-pod">
                     <span id="s" class="timer-num" style="background: var(--gold-light); -webkit-background-clip: text;">00</span>
                     <span class="timer-tag" style="opacity: 1;">Secs</span>
@@ -302,47 +332,180 @@
         </div>
     </section>
 
-    <section class="bg-[#030303] py-20 min-h-screen">
-        <div class="max-w-7xl w-full px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-script text-6xl md:text-8xl gold-foil">Our Story</h2>
-                <p class="font-modern text-[9px] tracking-[0.5em] text-white/30 uppercase mt-4 italic">Moments frozen in time</p>
-            </div>
+   <!-- ULTRA-LUXURY CINEMATIC GALLERY -->
+<style>
+    /* 1. ADVANCED GRID & PERSPECTIVE */
+    .gallery-perspective {
+        perspective: 2000px;
+    }
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <div class="lg:col-span-8 luxury-card rounded-[2.5rem] min-h-[450px] lg:h-[600px] group relative overflow-hidden" data-aos="fade-right">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
-                    <img src="https://i.ibb.co/GQqhkJDg/IMG-1768-2.jpg" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                    <div class="absolute bottom-10 left-10 z-20">
-                        <p class="font-royal text-gold tracking-[0.4em] text-[10px] mb-2 uppercase">The Featured Moment</p>
-                        <h4 class="font-script text-6xl text-white">Prasad & Sanjana</h4>
-                    </div>
-                </div>
+    .luxury-card {
+        position: relative;
+        overflow: hidden;
+        background: #0a0a0a;
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid rgba(197, 160, 89, 0.08);
+        cursor: none; /* Custom interaction feel */
+    }
 
-                <div class="lg:col-span-4 flex flex-col gap-6">
-                    <div class="luxury-card p-10 rounded-[2.5rem] flex-1 flex flex-col justify-center" data-aos="fade-left">
-                        <h5 class="font-royal text-[10px] tracking-[0.4em] mb-4 text-gold/50 uppercase">The Journey</h5>
-                        <p class="text-2xl text-white/80 leading-relaxed font-light italic">
-                            "Two lives, two hearts, joined together in friendship, united forever in love."
-                        </p>
-                    </div>
-                    <div class="luxury-card p-8 rounded-[2.5rem] text-center border-dashed border-gold/20" data-aos="fade-up">
-                        <div class="flex justify-center mb-4"><span class="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center animate-bounce">↓</span></div>
-                        <p class="font-modern text-[9px] tracking-[0.6em] text-gold/40 uppercase leading-loose">Cinematic Video<br>Coming Soon</p>
-                    </div>
-                </div>
+    /* 2. SHIMMERING GOLD BORDER ANIMATION */
+    .luxury-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--gold);
+        border-radius: inherit;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: all 0.6s ease;
+        pointer-events: none;
+        box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.2);
+    }
+
+    .luxury-card:hover::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* 3. 3D TILT & SCALE EFFECT */
+    .luxury-card:hover {
+        transform: translateY(-15px) rotateX(4deg) rotateY(-2deg);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(197, 160, 89, 0.1);
+        z-index: 20;
+    }
+
+    .luxury-card img {
+        transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
+        filter: brightness(0.7) contrast(1.1);
+    }
+
+    .luxury-card:hover img {
+        transform: scale(1.2) rotate(1deg);
+        filter: brightness(1) contrast(1);
+    }
+
+    /* 4. DYNAMIC GLASS OVERLAY */
+    .card-glass-reveal {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            45deg, 
+            rgba(197, 160, 89, 0.15) 0%, 
+            transparent 40%, 
+            rgba(255, 255, 255, 0.05) 50%, 
+            transparent 60%
+        );
+        transform: translateX(-100%);
+        transition: transform 1s ease;
+    }
+
+    .luxury-card:hover .card-glass-reveal {
+        transform: translateX(100%);
+    }
+
+    /* 5. ELEGANT CAPTION ANIMATION */
+    .gallery-caption {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        z-index: 10;
+        opacity: 0;
+        transform: translateY(30px) skewY(5deg);
+        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .luxury-card:hover .gallery-caption {
+        opacity: 1;
+        transform: translateY(0) skewY(0deg);
+    }
+
+    /* 6. GOLD FOIL HEADER EFFECT */
+    .gold-text-shimmer {
+        background: linear-gradient(72deg, #ca9d4c 4%, #f8e1a1 20%, #ca9d4c 40%, #f8e1a1 60%, #a47b33 80%, #ca9d4c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shimmerText 5s linear infinite;
+    }
+
+    @keyframes shimmerText { to { background-position: 200% center; } }
+</style>
+
+<section class="bg-[#020202] py-32 min-h-screen overflow-hidden">
+    <div class="max-w-7xl w-full px-6 mx-auto">
+        
+        <!-- Refined Header -->
+        <div class="text-center mb-24" data-aos="fade-up">
+            <span class="font-modern text-[9px] tracking-[1em] text-gold/60 uppercase block mb-4">The Visual Anthology</span>
+            <h2 class="font-script text-7xl md:text-9xl gold-text-shimmer">The Collection</h2>
+            <div class="flex items-center justify-center gap-4 mt-6">
+                <div class="h-[1px] w-12 bg-gold/20"></div>
+                <div class="w-2 h-2 rounded-full border border-gold/40"></div>
+                <div class="h-[1px] w-12 bg-gold/20"></div>
             </div>
         </div>
-    </section>
 
+        <!-- High-End Interactive Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 gallery-perspective">
+            
+            <!-- Feature Frame -->
+            <div class="md:col-span-8 luxury-card rounded-[3.5rem] h-[650px]" data-aos="zoom-out-right">
+                <div class="card-glass-reveal"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                
+                <img src="https://i.ibb.co/GQqhkJDg/IMG-1768-2.jpg" class="expandable-img w-full h-full object-cover">
+                
+                <div class="gallery-caption">
+                    <p class="font-modern text-[10px] tracking-[0.4em] text-gold/70 uppercase mb-2">Chapter One</p>
+                    <h3 class="font-script text-5xl md:text-6xl text-white">Moments in Time</h3>
+                </div>
+            </div>
+
+            <!-- Vertical Composition -->
+            <div class="md:col-span-4 flex flex-col gap-10">
+                <div class="luxury-card h-[305px] rounded-[3.5rem]" data-aos="fade-left" data-aos-delay="200">
+                    <div class="card-glass-reveal"></div>
+                    <img src="https://i.ibb.co/zW2Zk6Y1/IMG-1988.jpg" class="expandable-img w-full h-full object-cover">
+                </div>
+                
+                <div class="luxury-card h-[305px] rounded-[3.5rem]" data-aos="fade-left" data-aos-delay="400">
+                    <div class="card-glass-reveal"></div>
+                    <img src="https://i.ibb.co/k6Wy8CVw/IMG-20260426-065357-Normal.jpg" class="expandable-img w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Wide Landscape Balance -->
+            <div class="md:col-span-6 luxury-card h-[450px] rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-glass-reveal"></div>
+                <img src="https://i.ibb.co/r24ngJT4/IMG-1907-Normal.jpg" class="expandable-img w-full h-full object-cover">
+                <div class="gallery-caption">
+                    <h3 class="font-script text-4xl text-white">Pure Joy</h3>
+                </div>
+            </div>
+            
+            <div class="md:col-span-6 luxury-card h-[450px] rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-glass-reveal"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+                <img src="https://i.ibb.co/YFphp691/IMG-1737-2-normal.jpg" class="expandable-img w-full h-full object-cover">
+                
+                <div class="gallery-caption">
+                    <p class="font-modern text-[10px] tracking-[0.4em] text-gold/70 uppercase mb-2">Eternal Bond</p>
+                    <h3 class="font-script text-4xl text-white">Together Always</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sub-text -->
+        <div class="text-center mt-20" data-aos="fade-up">
+            <p class="font-modern text-[8px] tracking-[1.5em] text-white/20 uppercase">End of Preview • More to come</p>
+        </div>
+    </div>
+</section>
+    <!-- MUHURTA SECTION -->
     <section class="bg-gradient-to-b from-[#030303] to-[#1a0a0a] py-24 min-h-screen">
         <div class="max-w-5xl w-full mx-auto px-6">
             <div class="muhurta-glow-card p-12 md:p-24 rounded-[4rem] text-center" id="muhurtaCard" data-aos="zoom-in">
-                <div class="flex justify-center mb-8">
-                    <div class="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center animate-pulse">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
-                    </div>
-                </div>
                 <h2 class="font-royal text-4xl md:text-6xl gold-foil mb-2 uppercase tracking-[0.2em]">Shubh Vivah</h2>
                 <div class="celestial-line"></div>
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8 my-10">
@@ -365,35 +528,24 @@
                     <p class="font-royal text-3xl md:text-4xl text-white tracking-widest mb-2">Marda Mangal Karyalay</p>
                     <p class="text-gold/40 text-[11px] font-modern tracking-[0.4em] uppercase">Akkalkot Road, Solapur</p>
                 </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Marda+Mangal+Karyalay+Akkalkot+Road+Solapur&query_place_id=ChIJy_RdclzaxTsR_EpR0tWa1Mg" 
-   target="_blank" 
-   class="inline-block px-14 py-6 border border-gold/40 text-gold font-modern hover:bg-gold hover:text-black transition-all duration-700 tracking-[0.5em] text-[10px] font-bold rounded-full bg-black/60 shadow-2xl">
-    GET DIRECTIONS
-</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Marda+Mangal+Karyalay+Akkalkot+Road+Solapur" target="_blank" class="inline-block px-14 py-6 border border-gold/40 text-gold font-modern hover:bg-gold hover:text-black transition-all duration-700 tracking-[0.5em] text-[10px] font-bold rounded-full bg-black/60 shadow-2xl">GET DIRECTIONS</a>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="grand-finale">
         <div class="finale-glow"></div>
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="family-pill" data-aos="fade-down">
-                <h4 class="font-royal text-gold-light uppercase">
-                    Salunkhe & Mane Families
-                </h4>
+                <h4 class="font-royal text-gold-light uppercase">Salunkhe & Mane Families</h4>
             </div>
             <div class="glowing-divider" data-aos="zoom-in"></div>
-            <h2 class="thank-you-title" data-aos="zoom-out" data-aos-delay="300">
-                Thank You
-            </h2>
+            <h2 class="thank-you-title" data-aos="zoom-out" data-aos-delay="300">Thank You</h2>
             <div class="mt-12 space-y-4" data-aos="fade-up" data-aos-delay="600">
-                <p class="font-modern text-[9px] tracking-[0.8em] text-white/30 uppercase italic">
-                    Seeking your blessings
-                </p>
+                <p class="font-modern text-[9px] tracking-[0.8em] text-white/30 uppercase italic">Seeking your blessings</p>
                 <div class="h-[1px] w-20 bg-gold/20 mx-auto"></div>
-                <p class="font-modern text-[10px] tracking-[0.5em] text-gold/50 uppercase font-bold">
-                    Created by LR REFINERY • SOLAPUR
-                </p>
+                <p class="font-modern text-[10px] tracking-[0.5em] text-gold/50 uppercase font-bold">Created by LR REFINERY • SOLAPUR</p>
             </div>
         </div>
     </footer>
@@ -413,6 +565,7 @@
             }
         });
 
+        /* CURSOR */
         const cursor = document.getElementById('cursor');
         if (window.innerWidth >= 1024) {
             document.addEventListener('mousemove', e => {
@@ -421,6 +574,25 @@
             });
         }
 
+        /* LIGHTBOX SYSTEM */
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = document.querySelectorAll('.expandable-img');
+        const closeBtn = document.querySelector('.close-lightbox');
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => {
+            if(e.target !== lightboxImg) lightbox.classList.remove('active');
+        });
+
+        /* MUHURTA HOVER */
         const mCard = document.getElementById('muhurtaCard');
         document.addEventListener('mousemove', (e) => {
             const rect = mCard.getBoundingClientRect();
@@ -428,16 +600,11 @@
             const y = ((e.clientY - rect.top) / rect.height) * 100;
             mCard.style.setProperty('--x', `${x}%`);
             mCard.style.setProperty('--y', `${y}%`);
-            if (window.innerWidth > 1024) {
-                const rotateY = (e.clientX - (rect.left + rect.width / 2)) / 35;
-                const rotateX = -(e.clientY - (rect.top + rect.height / 2)) / 35;
-                mCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
         });
-        mCard.addEventListener('mouseleave', () => { mCard.style.transform = `rotateX(0) rotateY(0)`; });
 
+        /* TIMER */
         const targetDate = new Date("May 9, 2026 12:23:00").getTime();
-        const updateTimer = () => {
+        setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
             if (diff > 0) {
@@ -446,9 +613,7 @@
                 document.getElementById('m').innerText = String(Math.floor((diff % 36e5) / 6e4)).padStart(2, '0');
                 document.getElementById('s').innerText = String(Math.floor((diff % 6e4) / 1e3)).padStart(2, '0');
             }
-        };
-        setInterval(updateTimer, 1000);
-        updateTimer();
+        }, 1000);
     </script>
 </body>
 </html>
